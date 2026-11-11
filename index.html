@@ -63,7 +63,7 @@
   </div>
   <h2>Aydınlatma (aç / kapat)</h2>
   <div class="row">
-    <button data-zone="salon">Salon</button><button data-zone="mutfak">Mutfak</button><button data-zone="teras">Kış bahçesi</button><button data-zone="wc">Alt WC + merdiven</button><button data-zone="hol">Üst hol</button>
+    <button data-zone="salon">Salon</button><button data-zone="mutfak">Mutfak</button><button data-zone="teras">Kış bahçesi</button><button data-zone="zeytin">Zeytin ağacı</button><button data-zone="merdiven">Merdiven</button><button data-zone="wc">Alt WC + merdiven</button><button data-zone="hol">Üst hol</button>
     <button data-zone="yatak">Yatak</button><button data-zone="bebek">Bebek</button><button data-zone="banyo">Banyo</button><button data-zone="giyinme">Giyinme</button><button data-zone="all">Hepsi</button>
   </div>
   <h2>Gün ışığı — saat ve mevsim</h2>
@@ -91,7 +91,7 @@
 </div>
 <script>
 (() => {
-  const SLOTS = [{"s": "/DH4fBO+jExm3EbFKE/ujA==", "i": "CQnvwFkiKlBdwOON", "w": "dzhSo6ItAEv9mELXhNsjPYuIOVea+vNeAcfd0rDSJx6UCHqZD8o43Wzd/+JGipxV"}, {"s": "1fttLO3+rECcdF/3mVKywQ==", "i": "4Hnta5lrvKYurX+O", "w": "AntGmBnDx26vUsNrw2xIU+FCBaOJ/vDySgLdnHYKjS3Eo8auz/GYCEMoC7c3i86o"}], IV = "8UFW3ups1k3klq8C", ITER = 300000;
+  const SLOTS = [{"s": "oavTQuQPve+OYH/oevEaOw==", "i": "3aAu9UXQNFas9vRe", "w": "+rNQScEuyKaD4eMOpbig9fYIYAfhCVvXlw01EYFc3JmxDQkGIvWMjBJqYH3Z9mCe"}, {"s": "nS2lG6peWpFd8E2FHyj1VQ==", "i": "TNlxisRl+1oUISrM", "w": "hLEm0KsgLKyRlzDyujWdm9UqZAP46nywye9w+crCcOTqvQZFQSIME1YyyAksrQ8b"}], IV = "D/Y6JMcypgZAhvTF", ITER = 300000;
   const dec = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
   const msg = document.getElementById('lockMsg'), inp = document.getElementById('lockCode');
   document.getElementById('ui').style.display = 'none';
