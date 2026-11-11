@@ -66,12 +66,14 @@
     <button data-zone="salon">Salon</button><button data-zone="mutfak">Mutfak</button><button data-zone="teras">Kış bahçesi</button><button data-zone="wc">Alt WC + merdiven</button><button data-zone="hol">Üst hol</button>
     <button data-zone="yatak">Yatak</button><button data-zone="bebek">Bebek</button><button data-zone="banyo">Banyo</button><button data-zone="giyinme">Giyinme</button><button data-zone="all">Hepsi</button>
   </div>
-  <h2>Gün ışığı</h2>
+  <h2>Gün ışığı — saat ve mevsim</h2>
   <div class="row">
-    <button data-sun="sabah" class="on">Sabah</button>
-    <button data-sun="ogle">Öğle</button>
-    <button data-sun="aksam">Akşam</button>
-    <button data-sun="gece">Gece</button>
+    <button data-season="ilkbahar" class="on">İlkbahar</button><button data-season="yaz">Yaz</button><button data-season="sonbahar">Sonbahar</button><button data-season="kis">Kış</button>
+  </div>
+  <input id="sunHour" type="range" min="4" max="23.75" step="0.25" value="9.5" style="width:100%;margin:8px 0 2px">
+  <p id="sunInfo" style="margin:0 0 6px"></p>
+  <div class="row">
+    <button data-sun="sabah">Sabah</button><button data-sun="ogle">Öğle</button><button data-sun="aksam">Akşam</button><button data-sun="gece">Gece</button>
   </div>
 </div>
 <div id="hint">Sol tık: döndür · Sağ tık: kaydır · Tekerlek: yakınlaş</div>
@@ -89,7 +91,7 @@
 </div>
 <script>
 (() => {
-  const SLOTS = [{"s": "67i+6qZ0bGtMD7z77+Cj3A==", "i": "S+Og/sgeYmJENAcl", "w": "QYXtJmMIisgqrf8D1PDj5MvPCHiFkFqA4BETwNOCTH9aVd7U5z0NauVCCZpmN/v1"}, {"s": "6XXmgE+JQB/HbgigQLHGCQ==", "i": "tz+xK1mUc79wZud9", "w": "DoTo5E+xyPNM0m2frlRI4SBsfVhPsynwFlip2ImssKZBrx/1oMKDkHG7L/7e6DdF"}], IV = "W1JDVVKBBBI2Y0ln", ITER = 300000;
+  const SLOTS = [{"s": "/DH4fBO+jExm3EbFKE/ujA==", "i": "CQnvwFkiKlBdwOON", "w": "dzhSo6ItAEv9mELXhNsjPYuIOVea+vNeAcfd0rDSJx6UCHqZD8o43Wzd/+JGipxV"}, {"s": "1fttLO3+rECcdF/3mVKywQ==", "i": "4Hnta5lrvKYurX+O", "w": "AntGmBnDx26vUsNrw2xIU+FCBaOJ/vDySgLdnHYKjS3Eo8auz/GYCEMoC7c3i86o"}], IV = "8UFW3ups1k3klq8C", ITER = 300000;
   const dec = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
   const msg = document.getElementById('lockMsg'), inp = document.getElementById('lockCode');
   document.getElementById('ui').style.display = 'none';
