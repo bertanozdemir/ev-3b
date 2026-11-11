@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Dubleks — 3B Model</title>
+<style>
+  html,body{margin:0;height:100%;overflow:hidden;background:#dfe8ee;font-family:"Segoe UI",system-ui,sans-serif;color:#22302a}
+  canvas{display:block}
+  #ui{position:fixed;left:14px;top:14px;width:232px;background:rgba(250,250,246,.93);border-radius:12px;padding:12px 12px 10px;box-shadow:0 6px 24px rgba(0,0,0,.18);font-size:13px;max-height:calc(100% - 52px);overflow:auto}
+  #ui h1{font-size:15px;margin:0 0 2px}
+  #ui p{margin:0 0 8px;color:#5b6a62;font-size:12px}
+  #ui h2{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:#6d7c73;margin:10px 0 5px}
+  .row{display:flex;flex-wrap:wrap;gap:5px}
+  button{font:inherit;font-size:12.5px;border:1px solid #c9d2cb;background:#fff;color:#22302a;border-radius:7px;padding:6px 8px;cursor:pointer;flex:1 1 auto;text-align:center}
+  button:hover{background:#eef4ee}
+  button.on{background:#4f7a5b;border-color:#4f7a5b;color:#fff}
+  .col button{flex:1 1 100%;text-align:left}
+  #hint{position:fixed;right:14px;bottom:12px;background:rgba(30,40,34,.72);color:#fff;font-size:12px;padding:6px 10px;border-radius:8px}
+  #err{position:fixed;left:270px;top:14px;color:#a00;font:12px monospace;white-space:pre-wrap;max-width:60%}
+</style>
+<script type="importmap">
+{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.165.0/examples/jsm/","three/examples/jsm/":"https://cdn.jsdelivr.net/npm/three@0.165.0/examples/jsm/","three-mesh-bvh":"https://cdn.jsdelivr.net/npm/three-mesh-bvh@0.7.8/build/index.module.js","three-gpu-pathtracer":"https://cdn.jsdelivr.net/npm/three-gpu-pathtracer@0.0.23/build/index.module.js"}}
+</script>
+</head>
+<body>
+<div id="ui">
+  <h1>Dubleks daire</h1>
+  <p>Ters bahçe dubleks — tadilat sonrası</p>
+  <h2>Kalite</h2>
+  <div class="row col">
+    <button id="bPT">Gerçekçi render (ışın izleme)</button>
+  </div>
+  <p id="ptInfo" style="margin:5px 0 0"></p>
+  <h2>Görünüm</h2>
+  <div class="row" id="modes">
+    <button data-mode="alt" class="on">Alt kat</button>
+    <button data-mode="ust">Üst kat</button>
+    <button data-mode="tum">Kapalı</button>
+  </div>
+  <h2>Kamera</h2>
+  <div class="row col" id="views"></div>
+  <h2>Kış bahçesi</h2>
+  <div class="row col">
+    <button id="bRoof">Cam tavanı aç (sol yarı)</button>
+  </div>
+  <h2>Zip perdeler (soldan sağa)</h2>
+  <div class="row">
+    <button data-zip="0">1</button><button data-zip="1">2</button><button data-zip="2">3</button><button data-zip="3">4</button><button data-zip="all">Hepsi</button>
+  </div>
+  <h2>Salon sürgü kapı</h2>
+  <div class="row">
+    <button id="bDoorL" class="on">Soldan aç</button><button id="bDoorR">Sağdan aç</button>
+  </div>
+  <h2>Giyinme odası</h2>
+  <div class="row">
+    <button id="bLaundry">Çamaşır dolabı</button><button id="bKiler">Kiler</button>
+  </div>
+  <h2>Aydınlatma (aç / kapat)</h2>
+  <div class="row">
+    <button data-zone="salon">Salon</button><button data-zone="mutfak">Mutfak</button><button data-zone="teras">Kış bahçesi</button><button data-zone="hol">Hol + merdiven</button>
+    <button data-zone="yatak">Yatak</button><button data-zone="bebek">Bebek</button><button data-zone="banyo">Banyo</button><button data-zone="giyinme">Giyinme</button><button data-zone="all">Hepsi</button>
+  </div>
+  <h2>Gün ışığı</h2>
+  <div class="row">
+    <button data-sun="sabah" class="on">Sabah</button>
+    <button data-sun="ogle">Öğle</button>
+    <button data-sun="aksam">Akşam</button>
+    <button data-sun="gece">Gece</button>
+  </div>
+</div>
+<div id="hint">Sol tık: döndür · Sağ tık: kaydır · Tekerlek: yakınlaş</div>
+<div id="err"></div>
+<script>window.addEventListener('error',e=>{document.getElementById('err').textContent+=e.message+'\n'});</script>
+
+<div id="lock" style="position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#e9eee9;z-index:10">
+  <form id="lockForm" style="background:#fff;border-radius:14px;padding:26px 26px 20px;width:300px;box-shadow:0 8px 30px rgba(0,0,0,.15);font-family:'Segoe UI',system-ui,sans-serif">
+    <div style="font-size:17px;font-weight:600;margin-bottom:4px">3B model</div>
+    <div style="font-size:13px;color:#5b6a62;margin-bottom:14px">Bu sayfa yalnızca davetli kişilere açıktır. Size verilen erişim kodunu girin.</div>
+    <input id="lockCode" autocomplete="off" placeholder="Erişim kodu" style="width:100%;box-sizing:border-box;font:inherit;font-size:15px;padding:9px 10px;border:1px solid #c9d2cb;border-radius:8px;letter-spacing:.06em">
+    <button style="margin-top:10px;width:100%;background:#4f7a5b;border-color:#4f7a5b;color:#fff;padding:9px">Aç</button>
+    <div id="lockMsg" style="font-size:12.5px;color:#a33;min-height:18px;margin-top:8px"></div>
+  </form>
+</div>
+<script>
+(() => {
+  const SLOTS = [{"s": "pf+ZWV92QBhSizbLcpJgNw==", "i": "gwzGL3qGya1p8JHq", "w": "58PGr9RQPOnLqJjPw36LsZ6Tr4vn0TK+d/f09iw2JLxO6aYG+UOW3m3WZd/884y6"}], IV = "Ecxb7j6PqyWZKjCZ", ITER = 300000;
+  const dec = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
+  const msg = document.getElementById('lockMsg'), inp = document.getElementById('lockCode');
+  document.getElementById('ui').style.display = 'none';
+  async function open(code, quiet) {
+    code = code.toUpperCase().replace(/[^A-Z0-9]/g, '');
+    if (!code) return;
+    msg.style.color = '#5b6a62'; msg.textContent = 'Kontrol ediliyor…';
+    const base = await crypto.subtle.importKey('raw', new TextEncoder().encode(code), 'PBKDF2', false, ['deriveKey']);
+    for (const sl of SLOTS) {
+      try {
+        const k = await crypto.subtle.deriveKey({ name: 'PBKDF2', hash: 'SHA-256', salt: dec(sl.s), iterations: ITER }, base, { name: 'AES-GCM', length: 256 }, false, ['decrypt']);
+        const raw = await crypto.subtle.decrypt({ name: 'AES-GCM', iv: dec(sl.i) }, k, dec(sl.w));
+        const ck = await crypto.subtle.importKey('raw', raw, 'AES-GCM', false, ['decrypt']);
+        const buf = await (await fetch('veri.bin', { cache: 'no-store' })).arrayBuffer();
+        const src = new TextDecoder().decode(await crypto.subtle.decrypt({ name: 'AES-GCM', iv: dec(IV) }, ck, buf));
+        try { localStorage.setItem('erisimKodu', code); } catch (e) {}
+        document.getElementById('lock').remove(); document.getElementById('ui').style.display = '';
+        const sc = document.createElement('script'); sc.type = 'module'; sc.textContent = src; document.body.appendChild(sc);
+        return;
+      } catch (e) {}
+    }
+    try { localStorage.removeItem('erisimKodu'); } catch (e) {}
+    msg.style.color = '#a33'; msg.textContent = quiet ? '' : 'Kod tanınmadı.';
+  }
+  document.getElementById('lockForm').addEventListener('submit', e => { e.preventDefault(); open(inp.value); });
+  let saved = null; try { saved = localStorage.getItem('erisimKodu'); } catch (e) {}
+  if (saved) open(saved, true);
+})();
+</script>
+
+</body>
+</html>
