@@ -30,6 +30,7 @@
   <p>Ters bahçe dubleks — tadilat sonrası</p>
   <h2>Kalite</h2>
   <div class="row col">
+    <button id="bFilm">Ev turu filmi (4,5 dk)</button>
     <button id="bPT">Gerçekçi render (ışın izleme)</button>
   </div>
   <p id="ptInfo" style="margin:5px 0 0"></p>
@@ -95,7 +96,7 @@
 </div>
 <script>
 (() => {
-  const SLOTS = [{"s": "eNSa1dlW7oeXYq2lp1Ls3Q==", "i": "T0yYePtXf6am4gAn", "w": "QUfizxm9Xd6FSzkgPD9jxaz1satWw6FjCbirlu3zjuryhFV6+aA+koceG6uXZM0c"}, {"s": "r44xSIEtRwWczOfi6OSpWQ==", "i": "jwwJR+/J2rFXNSUk", "w": "Qb35vXWTzO7p3mJqYvYQ1amXklaTk9bHUNXjmx+/44AVJsM9wMl8NPiUcqC1hjbn"}], IV = "kgtMG3JhsdGG2yFk", ITER = 300000;
+  const SLOTS = [{"s": "zV3o+r47TYX1Y8hLeOICVw==", "i": "xoSUe9klWGb9xbWg", "w": "OL6MyeLGUQZzxlSdNgpcUCm3IhkeGvZE2zdmm+BqDN86tp/zhUFqsiMZfT1J3qeL"}, {"s": "Vy8Yz9HeWSHVNt83awX8LQ==", "i": "zZhHMVOFqw5Z9Ze9", "w": "l/BbF8xHkhY8yfEPeQG8/+BazrRDBU+79YuK8bY32QNvHq94wyjP/Co7PZL+G3bI"}], IV = "ZxAZ9RCrCAnCZ2KA", ITER = 300000;
   const dec = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
   const msg = document.getElementById('lockMsg'), inp = document.getElementById('lockCode');
   document.getElementById('ui').style.display = 'none';
