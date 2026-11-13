@@ -10,6 +10,10 @@
   canvas{display:block}
   #ui{position:fixed;left:14px;top:14px;width:232px;background:rgba(250,250,246,.93);border-radius:12px;padding:12px 12px 10px;box-shadow:0 6px 24px rgba(0,0,0,.18);font-size:13px;max-height:calc(100% - 52px);overflow:auto}
   #ui h1{font-size:15px;margin:0 0 2px}
+  #ui.kapali{display:none}
+  #uiToggle{position:fixed;left:270px;top:14px;width:34px;height:34px;flex:none;padding:0;border-radius:9px;font-size:17px;line-height:1;background:rgba(250,250,246,.93);box-shadow:0 4px 14px rgba(0,0,0,.18);z-index:5}
+  #ui.kapali + #uiToggle{left:14px}
+  #ui[style*="display: none"] + #uiToggle{display:none}
   #ui p{margin:0 0 8px;color:#5b6a62;font-size:12px}
   #ui h2{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:#6d7c73;margin:10px 0 5px}
   .row{display:flex;flex-wrap:wrap;gap:5px}
@@ -81,6 +85,13 @@
     <button data-sun="sabah">Sabah</button><button data-sun="ogle">Öğle</button><button data-sun="aksam">Akşam</button><button data-sun="gece">Gece</button>
   </div>
 </div>
+<button id="uiToggle" title="Menüyü gizle / göster" aria-label="Menüyü gizle veya göster">‹</button>
+<script>
+(() => { const ui = document.getElementById('ui'), b = document.getElementById('uiToggle');
+  const set = k => { ui.classList.toggle('kapali', k); b.textContent = k ? '☰' : '‹'; try { localStorage.setItem('menuKapali', k ? '1' : '0'); } catch (e) {} };
+  let k = false; try { k = localStorage.getItem('menuKapali') === '1'; } catch (e) {} set(k);
+  b.addEventListener('click', () => set(!ui.classList.contains('kapali'))); })();
+</script>
 <div id="hint">Sol tık: döndür · Sağ tık: kaydır · Tekerlek: yakınlaş</div>
 <div id="err"></div>
 <script>window.addEventListener('error',e=>{document.getElementById('err').textContent+=e.message+'\n'});</script>
@@ -96,7 +107,7 @@
 </div>
 <script>
 (() => {
-  const SLOTS = [{"s": "RCYPpFOcQy8dwPfNlDDC9A==", "i": "pIL05x1snh/tnfet", "w": "L93PELGzi78s+q+YCPm4NqN3DxFwsWuq7Zmqa6dzh6/NHtP2IQ0/nCi4j76q6o/n"}, {"s": "0YD5rRX7nOm1ZkHzSmq0Bw==", "i": "0yOhbqq2+2z0XWJT", "w": "bxkdWtYc2rtqoDfUZ8caWvAh6ApA/hPZDae8sakk2lQy9e8RnfCrc75/Xw4XoDHI"}], IV = "2cZGzr7X5/V4F3x+", ITER = 300000;
+  const SLOTS = [{"s": "1UBw1TYURRMHfbpPCBrDow==", "i": "qqkyWHahAofzRyGm", "w": "lW118OHYZp6i1KYyc3zyE9KMjaBcklghwJVaTZl2yQx5HKequ4IPFfRIDbsyIsOD"}, {"s": "zBeLKQXeNr0k9vVthmEDpg==", "i": "V1xFX7nG8/txQChA", "w": "z5Ej9dsCZDPFBrlzt1SjN43NZFbFE+nnP1NZxAuTi5DWIyHJhGjAX0UgRBkuyS5A"}], IV = "leFYkQm/7bkSIpTf", ITER = 300000;
   const dec = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
   const msg = document.getElementById('lockMsg'), inp = document.getElementById('lockCode');
   document.getElementById('ui').style.display = 'none';
