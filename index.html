@@ -63,6 +63,10 @@
   <div class="row">
     <button data-desk="acikgri">Açık gri</button><button data-desk="gri" class="on">Gri</button><button data-desk="antrasit">Antrasit</button><button data-desk="beyaz">Beyaz</button><button data-desk="mese">Meşe</button>
   </div>
+  <h2>Kapılar (aç / kapat)</h2>
+  <div class="row">
+    <button data-st="dYatak" class="on">Yatak odası</button><button data-st="dBebek" class="on">Bebek odası</button><button data-st="dBanyo" class="on">Banyo</button><button data-st="dGiyinme" class="on">Giyinme (sürgü)</button><button data-st="dWc">Alt WC</button><button data-st="dGiris">Daire girişi</button>
+  </div>
   <h2>Motorlu panjurlar</h2>
   <div class="row">
     <button data-st="shY">Yatak odası</button><button data-st="shB">Bebek odası</button>
@@ -108,7 +112,7 @@
 </div>
 <script>
 (() => {
-  const SLOTS = [{"s": "H7gRgHMdliKGQA+8a0CCeQ==", "i": "udlHIM41ozLO6JGc", "w": "z/9KYh22MZhK09kYSlmW2yO7PmU9eiceuHxWLYVpMIqIDRhfBM0GMlVO61ffoHLN"}, {"s": "youB3SF6rtG48X4ulyf4ZQ==", "i": "je4vbfz8GoLq4cGK", "w": "8oaq8nLSEQWl9xKDjFKi4ZuV/ox6gH5HkWmClH16xt475gK2Z6jQ7gsVbYsF0+0E"}], IV = "a6W51mPvuXX3SqqS", ITER = 300000;
+  const SLOTS = [{"s": "XNik8lFMi+jKvoPas02Fzw==", "i": "SP6A4YSUEkM5mF5h", "w": "DgPKa4qGVmPtE7sBudCO4LBPmk3XXxcrD9iBhFZuf02Y45HFkUTqRmHFH5qkcm/b"}, {"s": "tAEKZA8JUIO40qrt2fkG+w==", "i": "fkUZLfMev/XDcxGT", "w": "twbN1LHqb/qBQwkTuaWn9c5DzfcsPKa9/yRVdpnfLwLHxz05/6LMMS0e+51Enkfa"}], IV = "BtT+iDuAXXz87glj", ITER = 300000;
   const dec = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
   const msg = document.getElementById('lockMsg'), inp = document.getElementById('lockCode');
   document.getElementById('ui').style.display = 'none';
