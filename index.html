@@ -63,6 +63,10 @@
   <div class="row">
     <button data-desk="acikgri">Açık gri</button><button data-desk="gri" class="on">Gri</button><button data-desk="antrasit">Antrasit</button><button data-desk="beyaz">Beyaz</button><button data-desk="mese">Meşe</button>
   </div>
+  <h2>Mutfak zemini</h2>
+  <div class="row">
+    <button data-st="mzemin" class="on">Geçiş yolunda ahşap parke</button>
+  </div>
   <h2>Sandalyeler (masadan çek / it)</h2>
   <div class="row">
     <button data-st="sandT">Teras yemek masası</button><button data-st="sandM">Mutfak adası</button>
@@ -120,7 +124,7 @@
 </div>
 <script>
 (() => {
-  const SLOTS = [{"s": "9w5fRPkzYf4O4fScV9nGgQ==", "i": "ycjaU7fUHW2yDIvd", "w": "/nT23ziB0sS6G69lr93si9fLfhj4S8YEvHvsW1g5vGC5dtuZWTDblAugTMC048V7"}, {"s": "0dkB5l/qStohb6FaF+yOtw==", "i": "KT5ZVN8qpERPk24J", "w": "3b6CETFaxhRaiW2QCTyhgPn13oixlZEnLoiqdJWwizgDW3ioCV9eAqZlBNT1YwBC"}], IV = "VwmV6yDfNUqPjV3S", ITER = 300000;
+  const SLOTS = [{"s": "nNwX+luvGVzxQchX25QTXg==", "i": "+dHV7WmyB805leh5", "w": "YLG6WXgqVZIr1Kl1PKm8ebHekfELLjcQmyUyrtngj7RIxPEi3oPAu2sg9NRQZVjY"}, {"s": "1XH2xfzjiOFVFyioUz/onw==", "i": "pp2gKfTb2vcISrfK", "w": "6sMtBiY95/kLwDJjMgwWHa7AafBu6PRe8xMnxoWoXqfzasTfrEV05gCjKvHu5oVV"}], IV = "tyOMqzil/akpV694", ITER = 300000;
   const dec = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
   const msg = document.getElementById('lockMsg'), inp = document.getElementById('lockCode');
   document.getElementById('ui').style.display = 'none';
