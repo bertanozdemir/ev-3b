@@ -63,6 +63,10 @@
   <div class="row">
     <button data-desk="acikgri">Açık gri</button><button data-desk="gri" class="on">Gri</button><button data-desk="antrasit">Antrasit</button><button data-desk="beyaz">Beyaz</button><button data-desk="mese">Meşe</button>
   </div>
+  <h2>Sandalyeler (masadan çek / it)</h2>
+  <div class="row">
+    <button data-st="sandT">Teras yemek masası</button><button data-st="sandM">Mutfak adası</button>
+  </div>
   <h2>DJ masası</h2>
   <div class="row">
     <button data-st="djKapak">Kapak tahtasını kapat</button><button data-st="robot">Robot ışık şovu</button>
@@ -81,7 +85,7 @@
   </div>
   <h2>Aydınlatma (aç / kapat)</h2>
   <div class="row">
-    <button data-zone="salon">Salon</button><button data-zone="mutfak">Mutfak</button><button data-zone="teras">Kış bahçesi</button><button data-zone="zeytin">Zeytin ağacı</button><button data-zone="merdiven">Merdiven</button><button data-zone="wc">Alt WC + merdiven</button><button data-zone="hol">Üst hol</button>
+    <button data-zone="salon">Salon</button><button data-zone="mutfak">Mutfak</button><button data-zone="teras">Kış bahçesi</button><button data-zone="zeytin">Zeytin ağacı</button><button data-zone="merdiven">Merdiven</button><button data-zone="wc">Alt WC</button><button data-zone="bar">Mini bar</button><button data-zone="hol">Üst hol</button>
     <button data-zone="yatak">Yatak</button><button data-zone="bebek">Bebek</button><button data-zone="banyo">Banyo</button><button data-zone="giyinme">Giyinme</button><button data-zone="all">Hepsi</button>
   </div>
   <h2>Gün ışığı — saat ve mevsim</h2>
@@ -116,7 +120,7 @@
 </div>
 <script>
 (() => {
-  const SLOTS = [{"s": "4ONFxJHm2R3f91C0vKv4LA==", "i": "oPi60+ojwasFBS+o", "w": "PyL9GHvrOAIAMKNb6+uusDv4hEARFzldUH+VRA9wHzkJmCtpTrCIRRk2SUtgaRA6"}, {"s": "2a24lJlmc6yCbcfM9rVm1w==", "i": "D6lAVtwmbL3Etmwz", "w": "mZdsb7UWHC75cUohnIOPCbVvK4pLRvIRx8viOAuyWfpLbsjluJXTaW1+YEYIPyUI"}], IV = "Io+czN/xyfZJNGbb", ITER = 300000;
+  const SLOTS = [{"s": "Y7hquf4p0CCmvWm/3norMA==", "i": "XjKKG2M32oq2ZruX", "w": "RdsWoYVI5JTsifeahiMde7oZcBAb4zlNbdp4uTwQsOyL3f577Ta4M8ORYjWoxQPd"}, {"s": "7zzYelB7EJ76s3Y41KDO9g==", "i": "TfsJveDcAXEZl5sg", "w": "P5j32UC87HNvPYQjRzD+ZunLeE8lH9I86i6GkOa9TxbCL8k7y0vARougmH40yQ5w"}], IV = "Sfnd6/yX38Lgq33N", ITER = 300000;
   const dec = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
   const msg = document.getElementById('lockMsg'), inp = document.getElementById('lockCode');
   document.getElementById('ui').style.display = 'none';
