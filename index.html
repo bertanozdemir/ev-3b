@@ -65,11 +65,11 @@
   </div>
   <h2>Dolap kapakları (aç / kapat)</h2>
   <div class="row">
-    <button data-st="cab_mutfak">Mutfak</button><button data-st="cab_salon">Salon (bar, TV)</button><button data-st="cab_teras">Kış bahçesi</button><button data-st="cab_yatak">Yatak odası</button><button data-st="cab_bebek">Bebek odası</button><button data-st="cab_hol">Giriş dolabı</button><button data-st="cab_banyo">Banyo</button><button data-st="cab_giyinme">Giyinme</button><button id="bCabAll">Hepsi</button>
+    <button data-st="cab_mutfak">Mutfak</button><button data-st="cab_salon">Salon (bar)</button><button data-st="cab_teras">Kış bahçesi</button><button data-st="cab_yatak">Yatak odası</button><button data-st="cab_bebek">Bebek odası</button><button data-st="cab_hol">Giriş dolabı</button><button data-st="cab_banyo">Banyo</button><button data-st="cab_giyinme">Giyinme</button><button id="bCabAll">Hepsi</button>
   </div>
   <h2>Çekmeceler (aç / kapat)</h2>
   <div class="row">
-    <button data-st="cek_bas">Merdiven alt basamağı</button><button data-st="cek_masa">Çalışma masası</button>
+    <button data-st="cek_bas">Merdiven alt basamağı</button><button data-st="cek_masa">Çalışma masası</button><button data-st="cek_tv">TV ünitesi</button><button data-st="cek_yatak">Projeksiyon konsolu</button>
   </div>
   <h2>Mutfak zemini</h2>
   <div class="row">
@@ -132,7 +132,7 @@
 </div>
 <script>
 (() => {
-  const SLOTS = [{"s": "F/vguWOAUFHtVm+C0VeL+A==", "i": "tt1SWpNwNHbCW2gh", "w": "ElJf7A9vFB3ynAUw42W4cJ4oBTy5BTiyk/kRJiSOVONaYFsm/pBhPqQCJO0+L5SP"}, {"s": "d+Mlr8vHM532m1lqVAW3Og==", "i": "F8TeHgyRmhAQAWKT", "w": "KjWS5fe4SSov1KTNwu0YanVpdgVoJ8XhkldA5MAEGPaghvqgLHqrTnVv3g/JPuON"}], IV = "ueu5W2JYTNfpiZE3", ITER = 300000;
+  const SLOTS = [{"s": "Qc0XKkrPqcCezUUuCZ4GmQ==", "i": "Br6KRj0SZY8qj8fc", "w": "g4yj/VGBOVFJuW44GJpNFSSaoYj0Vo20Nklj4xg4VnPFDhADkQ1jZXwGUdRgXb5w"}, {"s": "qmjpDy9E4Y80spA2DcBpgg==", "i": "t8I1CECneMu13awc", "w": "o3YlpYf6uJyn8MNLIzlzHQGpGJMawz0Uc0m/FD8oOSENRuSpIM3mLXHusxSIAAnX"}], IV = "niJilDQTGdgadZWt", ITER = 300000;
   const dec = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
   const msg = document.getElementById('lockMsg'), inp = document.getElementById('lockCode');
   document.getElementById('ui').style.display = 'none';
